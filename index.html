@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<title>ReSur</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+	<div id="mask" class="mask"></div>
+	<div id="canvas"></div>
+	<script type="text/javascript">
+		var dpi = 25, id = 0;
+		var dot = document.createElement('div');
+		var dots = document.createElement('div');
+		var canvas = document.getElementById('canvas');
+		var hrefs = ['http://1992s.com', 'http://dribbble.com/ReSur', 'http://twitter.com/jinjinqian', 'https://www.douban.com/people/ReSur/', 'http://weibo.com/ReSur', 'http://1992s.com/go/games']
+		var imgs = [
+[
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 9, 9, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 1, 0, 0, 0, 0, 8, 9, 9, 8, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+[0, 1, -1, 0, 0, 0, 0, 8, 9, 9, 8, 0, 0, 8, 8, 0, 0, 0, 0, -2, 2, 0],
+[1, -1, -1, 0, 0, 0, 0, 8, 8, 8, 9, 0, 8, 9, 9, 8, 0, 0, 0, -2, -2, 2],
+[0, 1, -1, 0, 0, 0, 0, 8, 9, 9, 8, 0, 8, 8, 8, 8, 0, 0, 0, -2, 2, 0],
+[0, 0, 1, 0, 0, 0, 0, 8, 9, 9, 8, 0, 8, 9, 9, 9, 0, 0, 0, 2, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 9, 9, 8, 0, 0, 8, 8, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], 
+[
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 8, 12, 8, 12, 12, 12, 8, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 12, 12, 12, 8, 12, 12, 12, 8, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 8, 12, 8, 12, 12, 12, 8, 12, 8, 12, 8, 0, 0, 0, 0, 0],
+[0, 0, 1, 0, 0, 0, 8, 12, 12, 8, 8, 8, 8, 8, 12, 12, 8, 0, 0, 2, 0, 0],
+[0, 1, -1, 0, 0, 0, 8, 12, 12, 12, 12, 12, 8, 12, 12, 12, 8, 0, 0, -2, 2, 0],
+[1, -1, -1, 0, 0, 0, 8, 12, 12, 8, 8, 8, 8, 8, 12, 12, 8, 0, 0, -2, -2, 2],
+[0, 1, -1, 0, 0, 0, 8, 12, 8, 12, 12, 12, 8, 12, 8, 12, 8, 0, 0, -2, 2, 0],
+[0, 0, 1, 0, 0, 0, 0, 8, 12, 12, 12, 12, 8, 12, 12, 8, 0, 0, 0, 2, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 8, 12, 12, 8, 12, 12, 8, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0]],
+[
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 8, 0, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 9, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0],
+[0, 0, 1, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 2, 0, 0],
+[0, 1, -1, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, -2, 2, 0],
+[1, -1, -1, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, -2, -2, 2],
+[0, 1, -1, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, -2, 2, 0],
+[0, 0, 1, 0, 0, 0, 8, 9, 9, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 2, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+[
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 1, 0, 0, 0, 0, 8, 9, 9, 9, 9, 9, 9, 8, 0, 0, 0, 0, 2, 0, 0],
+[0, 1, -1, 0, 0, 0, 0, 8, 9, 9, 9, 9, 9, 9, 8, 0, 0, 0, 0, -2, 2, 0],
+[1, -1, -1, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, -2, -2, 2],
+[0, 1, -1, 0, 0, 0, 0, 0, 8, 9, 9, 9, 9, 8, 0, 0, 0, 0, 0, -2, 2, 0],
+[0, 0, 1, 0, 0, 0, 0, 0, 0, 8, 9, 9, 8, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+[
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 13, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 9, 9, 13, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 8, 9, 13, 0, 0, 0, 0, 0, 0],
+[0, 0, 1, 0, 0, 0, 0, 8, 8, 10, 10, 10, 8, 8, 8, 0, 0, 0, 0, 2, 0, 0],
+[0, 1, -1, 0, 0, 0, 8, 8, 10, 11, 11, 10, 10, 8, 8, 8, 0, 0, 0, -2, 2, 0],
+[1, -1, -1, 0, 0, 0, 8, 10, 10, 11, 10, 11, 10, 10, 8, 8, 0, 0, 0, -2, -2, 2],
+[0, 1, -1, 0, 0, 0, 8, 10, 10, 11, 11, 11, 10, 10, 8, 8, 0, 0, 0, -2, 2, 0],
+[0, 0, 1, 0, 0, 0, 0, 8, 10, 10, 10, 10, 10, 8, 8, 0, 0, 0, 0, 2, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+[
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 14, 14, 14, 10, 10, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 10, 10, 14, 15, 15, 15, 14, 10, 10, 0, 0, 0, 0, 0, 0],
+[0, 0, 1, 0, 0, 0, 0, 0, 10, 10, 14, 14, 14, 10, 10, 0, 0, 0, 0, 2, 0, 0],
+[0, 1, -1, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, -2, 2, 0],
+[1, -1, -1, 0, 0, 0, 0, 8, 8, 9, 9, 8, 9, 9, 8, 8, 0, 0, 0, -2, -2, 2],
+[0, 1, -1, 0, 0, 0, 0, 8, 8, 8, 9, 8, 9, 8, 8, 8, 0, 0, 0, -2, 2, 0],
+[0, 0, 1, 0, 0, 0, 0, 0, 0, 8, 0, 8, 0, 8, 0, 0, 0, 0, 0, 2, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+];
+		var margin_top = 0, margin_left = 0;
+		function color(type)
+		{
+			return (type + ' color' + Math.floor(Math.random() * 100));
+		}
+		function hasClass(obj, cls)
+		{
+			return obj.className.match(new RegExp('(\\s|^)' + cls + '($|\\s)'));
+		}
+		function addClass(obj, cls)
+		{
+			if (!hasClass(obj, cls)) obj.className += " " + cls;
+		}
+		function removeClass(obj, cls)
+		{
+			if (hasClass(obj, cls)) obj.className = obj.className.replace(new RegExp('(\\s|^)' + cls + '($|\\s)'), '');
+		}
+		function printLine(line)
+		{
+			if (line < numVertical())
+			{
+				point = canvas.childNodes[line];
+				if (point.childElementCount < numHorizontal())
+				{
+					dot.className = color('dot');
+					point.appendChild(dot.cloneNode(true));
+				}
+				else
+				{
+					if (!point.hasAttribute('class')) {
+						point.className = color('dots');
+					}
+					line++;
+				}
+				setTimeout('printLine(' + line + ')', 0);
+			}
+			else
+			{
+				margin_top = Math.floor((numVertical() - imgs[id].length) / 2);
+				margin_left = Math.floor((numHorizontal() - imgs[id][0].length) / 2);
+				draw(0, 0);
+			}
+		}
+		function moveLeft() {
+			id = (id + imgs.length - 1) % imgs.length;
+			draw(0, 0);
+		}
+		function moveRight() {
+			id = (id + 1) % imgs.length;
+			draw(0, 0);
+		}
+		function draw(line, column)
+		{
+			if (line < canvas.childElementCount) {
+				if (column < canvas.childNodes[line].childElementCount)
+				{
+					node = canvas.childNodes[line].childNodes[column];
+					removeClass(node, '__\\w+__');
+					removeClass(node, 'active-dot');
+					node.onclick = function(){};
+					if (line >= margin_top && line < margin_top + imgs[id].length && column >= margin_left && column < margin_left + imgs[id][0].length && imgs[id][line - margin_top][column - margin_left]){
+						dot_val = imgs[id][line - margin_top][column - margin_left];
+						if (dot_val <= 8 && dot_val > 0) {
+							addClass(node, 'active-dot __style' + id + '__');
+						} else if (dot_val > 9) {
+							addClass(node, 'active-dot __expansion' + dot_val + '__');
+						}
+
+						if (imgs[id][line - margin_top][column - margin_left] >= 8) {
+							node.onclick = function() {
+								if(hrefs[id]) {
+									location = hrefs[id];
+								}
+							}
+						}
+						else if (Math.abs(imgs[id][line - margin_top][column - margin_left]) == 1) {
+							node.onclick = moveLeft;
+						}
+						else if (Math.abs(imgs[id][line - margin_top][column - margin_left]) == 2) {
+							node.onclick = moveRight;
+						}
+						column++;
+						setTimeout('draw(' + line + ', ' + column + ')', 0);
+					}
+					else
+					{
+						column++;
+						draw(line, column);
+					}
+				}
+				else
+				{
+					column = 0;
+					line++;
+					draw(line, column);
+				}
+			}
+		}
+		window.onresize = function()
+		{
+			createColumn();
+		}
+		function createColumn() {
+			delta_column =  numVertical() - canvas.childElementCount;
+			for (var i = 0; i < delta_column; i++)
+			{
+				canvas.appendChild(dots.cloneNode(true));
+			}
+			printLine(0);
+		}
+		function numVertical() {
+			return Math.ceil(document.documentElement.clientHeight / dpi);
+		}
+		function numHorizontal() {
+			return Math.floor(document.documentElement.clientWidth / dpi);
+		}
+		var degtorad = Math.PI / 180;
+		var aspect_ratio = 1;
+		var speedX = 1;
+		var speedY = speedX * 90 * aspect_ratio;
+		function orientationHandler(event) {
+			delta_left = - event.gamma * speedX;
+			delta_top = - Math.sin(event.beta * degtorad) * speedY;
+			switch (window.orientation)
+			{
+				case 90:
+					temp = - delta_left;
+					delta_left = delta_top;
+					delta_top = temp;
+					break;
+				case -90:
+					temp = delta_left;
+					delta_left = - delta_top;
+					delta_top = temp;
+					break;
+				case 180:
+					delta_left = - delta_left;
+					delta_top = - delta_top;
+					break;
+			}
+			for (var i = 0; i < arr.length; i++) {
+				arr[i].style.left = delta_left  + 'px';
+				arr[i].style.top = delta_top  + 'px';
+			}
+		}
+		createColumn();
+		var arr = document.getElementsByClassName('active-dot');
+		document.onkeydown = function(event) {
+			if (event.keyCode == 13) location = hrefs[id];
+			else if (event.keyCode == 37) moveLeft();
+			else if (event.keyCode == 39) moveRight();
+		}
+		document.body.addEventListener('touchstart', function (e) {
+			nStartX = e.targetTouches[0].pageX;
+		});
+		document.body.addEventListener('touchend', function (e) {
+			deltaX = e.changedTouches[0].pageX - nStartX;
+			if (deltaX < -50) moveLeft();
+			else if (deltaX > 50) moveRight();
+		});
+		if (window.DeviceOrientationEvent) {
+			window.addEventListener("deviceorientation", orientationHandler, false);
+		}
+		var mask = document.getElementById('mask');
+		var preX = undefined;
+		var preV = 0;
+		var rangeX = 50;
+		var rangeY = rangeX * aspect_ratio;
+		var mouseover = false;
+		mask.onmouseover = function() {
+			if (window.DeviceOrientationEvent) {
+				window.removeEventListener("deviceorientation", orientationHandler, false);
+			}
+			mouseover = true;
+		}
+		window.onmousemove = function(event) {
+			if (mouseover) {
+				var e = event || window.event;
+				delta_left = (0.5 - e.clientX / document.documentElement.clientWidth) * rangeX + 'px';
+				delta_top = (0.5 - e.clientY / document.documentElement.clientHeight) * rangeY + 'px';
+				for (var i = 0; i < arr.length; i++) {
+					arr[i].style.left = delta_left;
+					arr[i].style.top = delta_top;
+				}
+				if (typeof preX != 'undefined') {
+					volecity = (Math.abs(e.clientX - preX) + Math.abs(e.clientY - preY));
+					if (volecity > 200) volecity = 200;
+					if (volecity > preV) preV = volecity;
+					mask.style.backgroundColor = 'rgba(255, 255, 255, ' + (0.5 + preV / 1000) + ')';
+				}
+				preX = e.clientX;
+				preY = e.clientY;
+				if (preV > 5) {
+					preV -= 5;
+				}
+			}
+		}
+	</script>
+	<script type="text/javascript" src="http://1992s.com/wp-content/themes/portfolio-press-child/js/info.js"></script>
+</body>
+
+</html>
